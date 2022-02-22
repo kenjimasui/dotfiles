@@ -1,0 +1,8 @@
+###
+### .zprofile - Zsh startup file (read if the shell is a login shell)
+### Note: zshenv -> zprofile -> zshrc -> zlogin
+###
+
+[[ -f ~/.zprofile.local0 ]] && source ~/.zprofile.local0
+
+[[ -f ~/.zprofile.local9 ]] && source ~/.zprofile.local9

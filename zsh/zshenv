@@ -1,0 +1,29 @@
+###
+### .zshenv - Zsh startup file (read first)
+### Note: zshenv -> zprofile -> zshrc -> zlogin
+###
+
+[[ -f ~/.zshenv.local0 ]] && source ~/.zshenv.local0
+
+umask 0022
+
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
+export EDITOR='vim'
+export VISUAL="${EDITOR}"
+export LESS='-M -X -x4'
+export LESSCHARSET='utf-8'
+export LESSHISTFILE='-'
+
+export RSYNC_RSH='ssh'
+export CVS_RSH='ssh'
+
+export PATH="${HOME}/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin${PATH+:$PATH}"
+# Remove duplicates
+typeset -U PATH
+
+# Disable session history on Apple Terminal
+export SHELL_SESSIONS_DISABLE=1
+
+[[ -f ~/.zshenv.local9 ]] && source ~/.zshenv.local9

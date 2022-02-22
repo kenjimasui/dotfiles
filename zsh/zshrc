@@ -1,0 +1,89 @@
+###
+### .zshrc - Zsh startup file (read if the shell is interactive)
+### Note: zshenv -> zprofile -> zshrc -> zlogin
+###
+
+[[ -f ~/.zshrc.local0 ]] && source ~/.zshrc.local0
+
+umask 0022
+
+unset HISTFILE
+
+setopt PRINT_EXIT_VALUE
+setopt AUTO_PUSHD
+
+autoload -U colors && colors
+
+bindkey -e
+
+PS1='%U%F{cyan}%n@%m:%~%u%F{yellow}%#%f '
+
+# Disable pager on AWS CLI
+export AWS_PAGER=''
+
+UNAME_KERNEL_NAME=`uname -s`
+
+##
+## Common settings
+##
+alias l='ls -al'
+alias ll='l'
+
+alias lsdsstr='find . -name .DS_Store -print'
+alias rmdsstr='find . -name .DS_Store -delete -exec echo removed: {} \;'
+
+alias ssh-nopubkey='ssh -o '\''PubkeyAuthentication no'\'
+alias ssh-tmp='ssh -o '\''UserKnownHostsFile /dev/null'\'
+
+alias ta='tmux attach-session'
+alias tl='tmux list-sessions'
+
+alias colors-list='for i in {0..255}; do printf "\x1b[38;5;${i}m%03d" ${i}; if [[ `expr ${i} % 16` = 15 ]]; then echo; else printf " "; fi; done'
+
+##
+## macOS-specific settings
+##
+if [[ "${UNAME_KERNEL_NAME}" = 'Darwin' ]] then
+    alias ls='ls -FG'
+
+    if [[ -x /usr/local/bin/brew ]] || [[ -x /opt/homebrew/bin/brew ]]; then
+        alias brew-update='brew update && brew upgrade && brew cleanup'
+    fi
+    if [[ -r /System/Library/LaunchDaemons/tftp.plist ]]; then
+        alias tftpd-start='sudo launchctl load -w /System/Library/LaunchDaemons/tftp.plist'
+        alias tftpd-stop='sudo launchctl unload -w /System/Library/LaunchDaemons/tftp.plist'
+    fi
+    if [[ -x /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport ]]; then
+        alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
+    fi
+    if [[ -x '/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code' ]]; then
+        alias code='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
+    fi
+##
+## Linux-specific settings
+##
+elif [[ "${UNAME_KERNEL_NAME}" = 'Linux' ]] then
+    alias ls='ls -F --color=auto'
+fi
+
+##
+## b64dump - Display a Base64 string in a plain hexdump style
+##
+function b64dump () {
+    for s in $*; do
+        echo "${s}" | base64 -d | xxd -p
+    done
+}
+
+##
+## Detect active tmux sessions
+##
+if type tmux > /dev/null; then
+    TMUX_SESSION_LIST=`tmux list-sessions 2>&1`
+    if [[ $? -eq 0 ]] && [[ -z "${TMUX}" ]]; then
+        TMUX_SESSION_NUM=`echo ${TMUX_SESSION_LIST} | wc -l;`
+        echo "${fg[yellow]}tmux: ${TMUX_SESSION_NUM} active session(s) found.${fg[default]}"
+    fi
+fi
+
+[[ -f ~/.zshrc.local9 ]] && source ~/.zshrc.local9

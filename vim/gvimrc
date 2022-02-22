@@ -1,0 +1,24 @@
+"""
+""" .gvimrc
+"""
+
+set title
+
+if has("mac")
+  set guifont=Menlo:h12
+  set guifontwide=HiraKakuPro-W3:h12
+elseif has("win32") || has("win64")
+  set guifont=DejaVu_Sans_Mono:h10
+  set guifontwide=Ricty:h11
+endif
+
+set guicursor=a:blinkon0
+set lines=42
+set columns=108
+set linespace=1
+
+" Hide toolbar
+set guioptions-=T
+
+set iminsert=0
+set imsearch=0

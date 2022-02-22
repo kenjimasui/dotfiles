@@ -1,0 +1,11 @@
+[core]
+	autocrlf = input
+	pager = less -R
+[color]
+	ui = true
+[credential]
+	helper = osxkeychain
+[pull]
+	rebase = false
+[include]
+	path = ~/.gitconfig.local
