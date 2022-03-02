@@ -46,7 +46,8 @@ alias colors-list='for i in {0..255}; do printf "\x1b[38;5;${i}m%03d" ${i}; if [
 if [[ "${UNAME_KERNEL_NAME}" = 'Darwin' ]] then
     alias ls='ls -FG'
 
-    if [[ -x /usr/local/bin/brew ]] || [[ -x /opt/homebrew/bin/brew ]]; then
+    if [[ -x /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
         alias brew-update='brew update && brew upgrade && brew cleanup'
     fi
     if [[ -r /System/Library/LaunchDaemons/tftp.plist ]]; then
