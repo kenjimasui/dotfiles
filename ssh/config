@@ -1,0 +1,16 @@
+## Global
+
+IgnoreUnknown UseKeychain
+
+Compression no
+ConnectTimeout 10
+HashKnownHosts no
+
+AddKeysToAgent yes
+UseKeychain yes
+
+Include config-*
+
+Host *
+    ServerAliveInterval 30
+    ServerAliveCountMax 10
