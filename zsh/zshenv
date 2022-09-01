@@ -19,6 +19,8 @@ export LESSHISTFILE='-'
 export RSYNC_RSH='ssh'
 export CVS_RSH='ssh'
 
+export XZ_DEFAULTS='-9e'
+
 export PATH="${HOME}/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin${PATH+:$PATH}"
 # Remove duplicates
 typeset -U PATH
