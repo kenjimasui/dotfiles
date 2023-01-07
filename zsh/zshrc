@@ -95,6 +95,25 @@ function randstran () {
 }
 
 ##
+## randstr - Generate a random string
+##
+function randstr () {
+    local targetchars=({0..9} {a..z} {A..Z} '!' '"' '#' '$' '%' '&' "'" '(' ')' '*' '+' ',' '-' '.' '/' ':' ';' '<' '=' '>' '?' '@' '[' '\' ']' '^' '_' '`' '{' '|' '}' '~')
+    local len=${1:-8}
+    if ! [[ ${len} =~ '^[0-9]+$' ]]; then
+        echo 'Error: Invalid string length' >&2; return 1
+    fi
+    if [[ ${len} < 1 ]]; then
+        echo 'Error: Length must be 1 or larger' >&2; return 1
+    fi
+    for i in {1..${len}}; do
+        # Using an option-terminating '-' to allow echo on Zsh to output '-'
+        echo -n - "$targetchars[$((${RANDOM} % 94 + 1))]"
+    done
+    echo
+}
+
+##
 ## Detect active tmux sessions
 ##
 if type tmux > /dev/null; then
