@@ -77,9 +77,27 @@ function b64dump () {
 }
 
 ##
-## randstran - Generate a random alphanumeric string (lowercase)
+## randstran - Generate a random alphanumeric string
 ##
 function randstran () {
+    local anchars=({0..9} {a..z} {A..Z})
+    local len=${1:-8}
+    if ! [[ ${len} =~ '^[0-9]+$' ]]; then
+        echo 'Error: Invalid string length' >&2; return 1
+    fi
+    if [[ ${len} < 1 ]]; then
+        echo 'Error: Length must be 1 or larger' >&2; return 1
+    fi
+    for i in {1..${len}}; do
+        echo -n $anchars[$((${RANDOM} % 62 + 1))]
+    done
+    echo
+}
+
+##
+## randstranl - Generate a random alphanumeric string (all lowercase)
+##
+function randstranl () {
     local anchars=({0..9} {a..z})
     local len=${1:-8}
     if ! [[ ${len} =~ '^[0-9]+$' ]]; then
@@ -98,6 +116,7 @@ function randstran () {
 ## randstr - Generate a random string
 ##
 function randstr () {
+    # TODO: Consolidate randstr* functions
     local targetchars=({0..9} {a..z} {A..Z} '!' '"' '#' '$' '%' '&' "'" '(' ')' '*' '+' ',' '-' '.' '/' ':' ';' '<' '=' '>' '?' '@' '[' '\' ']' '^' '_' '`' '{' '|' '}' '~')
     local len=${1:-8}
     if ! [[ ${len} =~ '^[0-9]+$' ]]; then
