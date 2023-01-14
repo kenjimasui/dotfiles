@@ -32,6 +32,8 @@ alias ll='l'
 alias lsdsstr='find . -name .DS_Store -print'
 alias rmdsstr='find . -name .DS_Store -delete -exec echo removed: {} \;'
 
+alias tar-archive='COPYFILE_DISABLE=1 tar -cv --exclude .DS_Store -f'
+
 alias ssh-nopubkey='ssh -o '\''PubkeyAuthentication no'\'
 alias ssh-tmp='ssh -o '\''UserKnownHostsFile /dev/null'\'
 
