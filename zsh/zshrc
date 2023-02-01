@@ -34,6 +34,9 @@ alias rmdsstr='find . -name .DS_Store -delete -exec echo removed: {} \;'
 
 alias tar-archive='COPYFILE_DISABLE=1 tar -cv --exclude .DS_Store -f'
 
+alias tr-u2l="tr '[:upper:]' '[:lower:]'"
+alias tr-l2u="tr '[:lower:]' '[:upper:]'"
+
 alias ssh-nopubkey='ssh -o '\''PubkeyAuthentication no'\'
 alias ssh-tmp='ssh -o '\''UserKnownHostsFile /dev/null'\'
 
