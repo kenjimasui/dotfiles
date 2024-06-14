@@ -7,7 +7,6 @@ vim.cmd.language('en_US.UTF-8')
 -- Load plugins with vim-plug
 local Plug = vim.fn['plug#']
 vim.call('plug#begin')
---Plug 'folke/tokyonight.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree'
@@ -16,7 +15,7 @@ vim.call('plug#end')
 -- vim-airline
 vim.g.airline_powerline_fonts = 1
 vim.g['airline#extensions#tabline#enabled'] = 1
---vim.g.airline_theme = 'behelit'
+--vim.g.airline_theme = ''
 
 -- Search
 vim.opt.ignorecase = true
@@ -42,7 +41,7 @@ vim.api.nvim_create_autocmd('FileType', {
 -- Display
 vim.cmd.syntax('enable')
 vim.opt.background = 'dark'
---vim.cmd.colorscheme('tokyonight-night')
+vim.cmd.colorscheme('torte')
 vim.cmd.highlight({'CursorLine', 'cterm=underline', 'ctermfg=NONE', 'ctermbg=NONE', 'term=NONE'})
 vim.cmd.highlight({'LineNr', 'cterm=NONE', 'ctermfg=8', 'ctermbg=0'})
 vim.cmd.highlight({'CursorLineNr', 'cterm=NONE', 'ctermfg=0', 'ctermbg=8'})
